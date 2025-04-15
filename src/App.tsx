@@ -40,19 +40,39 @@ function App() {
       <CssBaseline />
       <Container maxWidth="md">
         <Box sx={{ my: 4 }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-            <Typography variant="h4" component="h1">
+          <Box sx={{ 
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            mb: 4 
+          }}>
+            <Typography 
+              variant="h3" 
+              component="h1"
+              sx={{ 
+                fontWeight: 'bold',
+                textAlign: 'center'
+              }}
+            >
               Metadata Analyzer
             </Typography>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={darkMode}
-                  onChange={() => setDarkMode(!darkMode)}
-                />
-              }
-              label="Dark Mode"
-            />
+            <Box sx={{ 
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)'
+            }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={darkMode}
+                    onChange={() => setDarkMode(!darkMode)}
+                  />
+                }
+                label="Dark Mode"
+              />
+            </Box>
           </Box>
 
           <Box
@@ -109,6 +129,21 @@ function App() {
               </Box>
             </Box>
           )}
+
+          <Box sx={{ 
+            mt: 8,
+            textAlign: 'center'
+          }}>
+            <Typography 
+              variant="caption" 
+              sx={{ 
+                color: 'text.secondary',
+                fontSize: '0.75rem'
+              }}
+            >
+              Powered by Dynamic.IO
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
