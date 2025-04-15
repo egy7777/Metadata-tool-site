@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ThemeProvider, CssBaseline, Container, Box, Typography, Switch, FormControlLabel } from '@mui/material'
+import { ThemeProvider, CssBaseline, Container, Box, Typography, Switch, FormControlLabel, useMediaQuery } from '@mui/material'
 import { useDropzone } from 'react-dropzone'
 import { lightTheme, darkTheme } from './theme'
 import exifr from 'exifr'
@@ -8,6 +8,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [metadata, setMetadata] = useState<any>(null)
   const [preview, setPreview] = useState<string | null>(null)
+  const isMobile = useMediaQuery('(max-width:600px)')
 
   const onDrop = async (acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
@@ -43,25 +44,29 @@ function App() {
           <Box sx={{ 
             position: 'relative',
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            mb: 4 
+            mb: 4,
+            gap: isMobile ? 2 : 0
           }}>
             <Typography 
-              variant="h3" 
+              variant={isMobile ? "h4" : "h3"}
               component="h1"
               sx={{ 
                 fontWeight: 'bold',
-                textAlign: 'center'
+                textAlign: 'center',
+                order: isMobile ? 1 : 0
               }}
             >
               Metadata Analyzer
             </Typography>
             <Box sx={{ 
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)'
+              position: isMobile ? 'static' : 'absolute',
+              right: isMobile ? 'auto' : 0,
+              top: isMobile ? 'auto' : '50%',
+              transform: isMobile ? 'none' : 'translateY(-50%)',
+              order: isMobile ? 0 : 1
             }}>
               <FormControlLabel
                 control={
